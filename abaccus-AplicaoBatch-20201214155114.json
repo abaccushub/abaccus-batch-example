@@ -1,0 +1,246 @@
+{
+  "openapi" : "3.0.1",
+  "abaccus" : "1.1",
+  "info" : {
+    "title" : "Aplicação Batch",
+    "description" : "VERTICAL TESTES RODRO V3",
+    "contact" : null,
+    "version" : null
+  },
+  "tags" : [ {
+    "name" : "Testebatch",
+    "description" : "Contexto de Execução"
+  } ],
+  "paths" : {
+    "/testebatch" : {
+      "post" : {
+        "operationId" : "Testebatch",
+        "tags" : [ "Testebatch" ],
+        "summary" : "Contexto de Execução",
+        "description" : null,
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Testebatch"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Retorno"
+                }
+              }
+            },
+            "required" : true
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Retorno" : {
+        "properties" : {
+          "bom" : {
+            "name" : "bom",
+            "type" : "string"
+          },
+          "calculos" : {
+            "name" : "calculos",
+            "$ref" : "#/components/schemas/RetornoCalculo"
+          },
+          "procedimentos" : {
+            "name" : "procedimentos",
+            "$ref" : "#/components/schemas/RetornoProcedimentos"
+          },
+          "rastreio" : {
+            "name" : "rastreio",
+            "type" : "string"
+          },
+          "regras" : {
+            "name" : "regras",
+            "$ref" : "#/components/schemas/RetornoRegra"
+          },
+          "tabelas" : {
+            "name" : "tabelas",
+            "$ref" : "#/components/schemas/RetornoTabela"
+          },
+          "variaveis" : {
+            "name" : "variaveis",
+            "$ref" : "#/components/schemas/Testebatch"
+          }
+        }
+      },
+      "RetornoRegra" : {
+        "properties" : {
+          "codigoRetorno" : {
+            "name" : "codigoRetorno",
+            "type" : "integer"
+          },
+          "devolutiva" : {
+            "name" : "devolutiva",
+            "type" : "string"
+          },
+          "nomeAmigavel" : {
+            "name" : "nomeAmigavel",
+            "type" : "string"
+          },
+          "retornos" : {
+            "name" : "retornos",
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "RetornoCalculo" : {
+        "properties" : {
+          "codigoRetorno" : {
+            "name" : "codigoRetorno",
+            "type" : "integer"
+          },
+          "devolutiva" : {
+            "name" : "devolutiva",
+            "type" : "string"
+          },
+          "formulas" : {
+            "name" : "formulas",
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/RetornoFormula"
+            }
+          },
+          "nomeAmigavel" : {
+            "name" : "nomeAmigavel",
+            "type" : "string"
+          }
+        }
+      },
+      "RetornoFormula" : {
+        "properties" : {
+          "formula" : {
+            "name" : "formula",
+            "type" : "string"
+          },
+          "resultado" : {
+            "name" : "resultado",
+            "type" : "string"
+          }
+        }
+      },
+      "RetornoProcedimentos" : {
+        "properties" : {
+          "codigoRetorno" : {
+            "name" : "codigoRetorno",
+            "type" : "integer"
+          },
+          "devolutiva" : {
+            "name" : "devolutiva",
+            "type" : "string"
+          },
+          "nomeAmigavel" : {
+            "name" : "nomeAmigavel",
+            "type" : "string"
+          },
+          "raiz" : {
+            "name" : "raiz",
+            "type" : "object"
+          }
+        }
+      },
+      "RetornoTabela" : {
+        "properties" : {
+          "codigoRetorno" : {
+            "name" : "codigoRetorno",
+            "type" : "integer"
+          },
+          "devolutiva" : {
+            "name" : "devolutiva",
+            "type" : "string"
+          },
+          "nomeAmigavel" : {
+            "name" : "nomeAmigavel",
+            "type" : "string"
+          },
+          "resultados" : {
+            "name" : "resultados",
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/RetornoTabelaResultado"
+            }
+          }
+        }
+      },
+      "RetornoTabelaResultado" : {
+        "properties" : {
+          "resultado" : {
+            "name" : "resultado",
+            "type" : "string"
+          },
+          "saida" : {
+            "name" : "saida",
+            "type" : "string"
+          }
+        }
+      },
+      "Cobertura" : {
+        "properties" : {
+          "valorCapital" : {
+            "id" : 174,
+            "idVariavel" : 112,
+            "name" : "valorCapital",
+            "type" : "number",
+            "tipo" : "Decimal",
+            "format" : "double",
+            "description" : "valorCapital",
+            "example" : 0.0
+          },
+          "siglaCobertura" : {
+            "id" : 190,
+            "idVariavel" : 110,
+            "name" : "siglaCobertura",
+            "type" : "string",
+            "tipo" : "Dominio",
+            "description" : "Domínio de coberturas",
+            "dominios" : {
+              "BAS" : "BAS",
+              "VIA" : "VIA"
+            },
+            "enum" : [ "BAS", "VIA" ]
+          }
+        }
+      },
+      "Testebatch" : {
+        "properties" : {
+          "da" : {
+            "id" : 265,
+            "idVariavel" : 114,
+            "name" : "da",
+            "type" : "number",
+            "tipo" : "Decimal",
+            "format" : "double",
+            "description" : "DA",
+            "example" : 0.0,
+            "readOnly" : false
+          },
+          "cobertura" : {
+            "id" : 264,
+            "idVariavel" : 111,
+            "name" : "cobertura",
+            "tipo" : "Complexo",
+            "description" : "Cobertura",
+            "readOnly" : false,
+            "$ref" : "#/components/schemas/Cobertura"
+          }
+        }
+      }
+    }
+  }
+}

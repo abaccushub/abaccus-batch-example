@@ -1,0 +1,75 @@
+package regras;
+
+import java.util.concurrent.*;
+import java.util.*;
+import java.lang.*;
+import java.math.*;
+import org.apache.commons.lang3.time.DateUtils;
+import br.com.abaccus.nucleo.*;
+
+global br.com.abaccus.nucleo.Retorno retorno;
+global br.com.abaccus.contrato.motor.DominioHelper $dominio;
+
+/* CONTEXTO */
+
+declare Cobertura
+	valorCapital : Double
+	siglaCobertura : String
+end
+
+declare Testebatch
+	da : Double
+	cobertura : Cobertura
+end
+
+/* /CONTEXTO */
+
+
+/* regra[142 .,. testebatch .,. regra .,. 270 .,. daeMaior] */
+
+declare regra_270
+    entrou : Boolean
+    passou : Boolean
+    valor : Double
+end
+
+rule "Regra iniciativa 'Regra' 270"
+dialect "mvel"
+when
+then
+    regra_270 regra = new regra_270();
+    regra.entrou = false;
+    regra.passou = false;
+    insert(regra);
+end
+
+rule "Regra finalizacao 'Regra' 270"
+dialect "mvel"
+salience - 1024
+when
+    regra : regra_270( entrou == false, passou == false )
+then
+    regra.passou = true;
+    update(regra);
+end
+
+rule "testebatch - 270 - daeMaior"
+dialect "mvel"
+salience 1024
+when
+    regra : regra_270( entrou == false, passou == false )
+    Testebatch (
+
+ (     da > 10
+ )  
+
+)
+then
+    retorno.regra(0L,"daeMaior","",null);
+    regra.entrou = true;
+    regra.passou = true;
+    update(regra);
+end
+
+/* /regra[142 .,. testebatch .,. regra .,. 270 .,. daeMaior] */
+
